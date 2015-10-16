@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="./bower_components/Chart.js/Chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+    <title>Chart JS</title>
+  </head>
+  <body>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 box">
+          <canvas style="width: 100%; height: 100%;" id="myBarChart"></canvas>
+          <div id="legendDiv" class="chart-legend"></div>
+        </div>
+
+      </div>
+
+  </body>
+<script>
+  var ctx = document.getElementById("myBarChart").getContext("2d");
+  var data = {
+    labels: ["2011", "2012", "2013", "2014", "2015", ],
+    datasets: [
+        {
+            label: "No. of offers made",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [342, 357, 225, 316, 400]
+        },
+        {
+            label: "No. of companies visited",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [57,50,41,55,66]
+        }
+    ]
+  };
+
+
+    var options = {
+      scaleBeginAtZero : true,
+
+   //Boolean - Whether grid lines are shown across the chart
+   scaleShowGridLines : true,
+
+   //String - Colour of the grid lines
+   scaleGridLineColor : "rgba(0,0,0,.05)",
+
+   //Number - Width of the grid lines
+   scaleGridLineWidth : 1,
+
+   //Boolean - Whether to show horizontal lines (except X axis)
+   scaleShowHorizontalLines: true,
+
+   //Boolean - Whether to show vertical lines (except Y axis)
+   scaleShowVerticalLines: true,
+
+   //Boolean - If there is a stroke on each bar
+   barShowStroke : true,
+
+   //Number - Pixel width of the bar stroke
+   barStrokeWidth : 2,
+
+   //Number - Spacing between each of the X value sets
+   barValueSpacing : 5,
+
+   //Number - Spacing between data sets within X values
+   barDatasetSpacing : 1,
+
+   //String - A legend template
+   legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+};
+  var myBarChart = new Chart(ctx).Bar(data, options);
+  document.getElementById("legendDiv").innerHTML = myBarChart.generateLegend();
+
+
+</script>
+
+</html>
